@@ -1,0 +1,64 @@
+lass binaryheap:
+    
+    def __init__(self):
+        self.heaplist = [0]
+        self.currentSize = 0
+        
+    def percup(self, index):
+        while index // 2 > 0:
+            if self.heaplist[index] <  self.heaplist[index // 2]:
+                temp = self.heaplist[index // 2]
+                self.heaplist[index // 2] = self.heaplist[index]
+                self.heaplist[index] = temp
+            index = index // 2
+            
+    def percDown(self,index):
+        while (index * 2) <= self.currentSize:
+            mc = self.minChild(index)
+            if self.heaplist[index] > self.heaplist[mc]:
+                tmp = self.heaplist[index]
+                self.heaplist[index] = self.heaplist[mc]
+                self.heaplist[mc] = tmp
+            index = mc
+
+    def minChild(self,index):
+        if index * 2 + 1 > self.currentSize:
+            return index * 2
+        else:
+            if self.heaplist[index*2] < self.heaplist[index*2+1]:
+                return index * 2
+            else:
+                return index * 2 + 1
+
+    def insert(self, value):
+        self.heaplist.append(value)
+        self.currentSize = self.currentSize + 1
+        self.percup(self.currentSize)
+        
+    def delmin(self):
+        popval = self.heaplist[1]
+        self.heaplist[1] = self.heaplist[currentSize]
+        self.currenSize = self.currentSize -1
+        self.heaplist.pop()
+        self.percDown(1)
+        return(popval)
+    
+    def findi(self, value):
+        count = 0
+        if not self.heaplist:
+            return('Wrong!')
+        for i in self.heaplist:
+            if value == i:
+                return(count)
+            else:
+                count = count + 1
+        if count >= len(self.heaplist):
+            return('Wrong!')
+              
+    
+    def deldex(self, index):
+        temp = self.heaplist(self.currentSize)
+        self.heaplist[index] = temp
+        self.currentSize = self.curentSize - 1
+        percDown(self.heaplist[index])
+                
