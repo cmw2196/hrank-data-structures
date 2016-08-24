@@ -1,0 +1,166 @@
+#unfinished come back to later
+
+
+
+import random
+import time 
+import functools
+        
+class treap:
+    
+    def __init__(self, value):
+        self.value = value
+        self.priority = random.randint(0,10000000000)
+        self.size = 1
+        self.left = None
+        self.right = None
+        self.parent = None
+        
+    def udsize(self):
+        self.size = 1 + getsize(self.left) + getsize(self.right)     
+
+def getsize(treap):
+    total = 0 if treap is None else treap.size
+    return(total)
+
+def merge(L,R):
+        if L is None:
+            return(R)
+        if R is None:
+            return(L)
+        if L.priority > R.priority:
+            L.right = merge(L.right, R)
+            L.udsize()
+            return(L)
+        else:
+            R.left = merge(L, R.left)
+            R.udsize()
+            return(R)
+    
+def split(root, key):
+        if root is None:
+            return(None, None)
+        if root.size >= key:
+            L,R = split(root.left, key)
+            root.left = R
+            root.udsize()
+            return(L, root)
+        else:
+            L,R = split(root.right, key - root.size - 1)
+            root.right = L
+            root.udsize()
+            return(root, R)   
+    
+def delete(delkey, trp):
+        L,R = split(delkey, trp)
+        dlt, R = split(1,R)
+        return(merge(L,R))    
+    
+def insert(trp, value):
+    node = treap(value)
+    if trp is None:
+        return(node)
+    else:
+        L,R = split(trp, node.size)
+        return(merge(L, merge(node, R)))    
+        
+def insert1(treap1, value):
+    node = treap(value)
+    if treap1 is None:
+        return(node)
+    elif (node.size >= treap1.size) or (treap1.priority >= node.priority):
+        L,R = split(treap1, node.size)
+        return(merge(merge(L, node), R))
+    elif treap1.left:
+        temp = treap1.left
+        if node.size <= temp.size:
+            insert1(value, treap1.left)
+        else:
+            insert1(treap1.right, value)
+    else:
+        treap1.left = node
+        
+    
+def query(typpe, start, stop, treap1):
+    print(treap1.size)
+    print(start)
+    print(stop)
+    L1, R1 = split(treap1, start)
+    prints(L1)
+    print('cokc')
+    prints(R1)
+    print('mock')
+    L2, R2 = split(stop, R1)
+    prints(R2)
+    print('cock')
+    prints(L2)
+    temp = merge(L1, R2)
+    #prints(temp)
+    if typpe == 1:
+        return(merge(L2, temp))
+    else:
+        return(merge(temp, L2))
+    
+            
+def prints(root):
+    def dfs(root):
+        if root is None:
+            return
+        dfs(root.left)
+        print([root.value, root.size], end=' ')
+        dfs(root.right) 
+        
+    dfs(root)
+    print()
+               
+def arraymaker(treap):
+    newarray = []
+    
+    def recurse(root):
+        if not root:
+            return
+        recurse(root.left)
+        newarray.append(root.value)
+        recurse(root.right)  
+        
+    recurse(treap)
+    return(newarray)
+
+begin = input().strip().split(' ')
+n, queries = int(begin[0]), int(begin[1])
+array = [int(x) for x in input().strip().split(' ')]
+#treap1 = treap(array[0])
+#for a in array[1:]:
+#    treap1 = insert(a, treap1)
+#q = [int(x) for x in input().strip().split(' ')]
+#g = query2(q[0], q[1], q[2], treap1)
+#array = arraymaker(g)
+#for a in array:
+#    print(a, end= ' ')
+
+#print(abs(array[0] - array[-1]))
+
+
+
+#treap1 = treap(array[0])
+treap1 = None
+for a in array:
+    treap1 = insert(treap1, a)
+prints(treap1)
+
+
+#for i in range(queries): 
+#    q = [int(x) for x in input().strip().split(' ')]
+#    array = arraymaker(treap1)
+#    print(array)
+#    treap1 = query(q[0], array[q[1]] , array[q[2]] - 1, treap1)
+#    array = arraymaker(treap1)
+#   print(abs(array[0] - array[-1]))
+#    for a in array:
+#        print(a, end= ' ')
+ 
+
+
+    
+
+        
