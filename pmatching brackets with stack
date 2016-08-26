@@ -1,0 +1,19 @@
+def match(s):
+    stack = []
+    lefts = '{(['
+    rights = '})]'
+    for a in s:
+        if a in lefts:
+            stack.append(a)
+        elif a in rights:
+            try:
+                pmatch = stack.pop()
+                if pmatch in rights or not (rights.index(a) == lefts.index(pmatch)):
+                    stack.append(pmatch)
+                    stack.append(a)
+            except IndexError:
+                stack.append(a)
+    if stack:
+        print("NO")
+    else:
+        print('YES')
