@@ -82,18 +82,8 @@ def insert1(treap1, value):
         
     
 def query(typpe, start, stop, treap1):
-    print(treap1.size)
-    print(start)
-    print(stop)
     L1, R1 = split(treap1, start)
-    prints(L1)
-    print('cokc')
-    prints(R1)
-    print('mock')
     L2, R2 = split(stop, R1)
-    prints(R2)
-    print('cock')
-    prints(L2)
     temp = merge(L1, R2)
     #prints(temp)
     if typpe == 1:
