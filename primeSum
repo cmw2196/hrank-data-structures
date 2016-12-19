@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static boolean[] listprimes(int n){
+        boolean[] sieve = new boolean[n + 1];
+        for(int i = 2; i <=(int) Math.sqrt(n); i++){
+            if (sieve[i] == false){
+                for(int k = (int) Math.pow(i,2); k <= n; k = k + i){
+                    sieve[k] = true;
+                }
+            }
+        }
+        
+        return(sieve);   
+    }    
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        boolean[] primeslist = listprimes(1000000);
+        long primesum =0;
+        long[] psums = new long[1000001];
+        for(int i =2; i <= 1000000; i++){
+            if(primeslist[i] == false){
+                primesum += i;
+                psums[i]= primesum;
+                
+            }else{
+                psums[i] = primesum;
+            }
+        }
+        for(int a0 = 0; a0 < t; a0++){
+            int n = in.nextInt();
+            System.out.println(psums[n]);
+
+            }
+        }
+    }
