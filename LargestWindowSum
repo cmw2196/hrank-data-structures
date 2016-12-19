@@ -1,0 +1,92 @@
+import java.io.*;
+import java.util.*;
+
+
+//Finding the greatest product of K consecutive digits in a n >>> k length array by using a sliding k-length window (queue) in O(n)
+
+public class Solution {
+    
+    public static long windowprod(LinkedList<Long> list){
+        try{
+            long elem = list.element();  
+        }catch (NoSuchElementException e){
+            return 0;
+        }
+        
+        long count = 1L;
+        for(int a = 0; a < list.size(); a++){
+            count = count * (long) list.get(a);
+        }
+        return(count);
+    }
+    
+    public static ArrayList<Long> dmakr(String n){
+        ArrayList<Long> array = new ArrayList<Long>();
+        for(int i = 0; i < n.length(); i++) {
+            array.add(Long.valueOf(Character.getNumericValue(n.charAt(i))));
+        }
+        return array;
+    }
+    
+    public static LinkedList<Long> quemaker(ArrayList<Long> digits, int i,long k){
+        LinkedList<Long> queue = new LinkedList<Long>();
+        
+        try{
+            while(queue.size() < k){
+                if(digits.get(i) == 0){
+                    queue.clear();
+                }else{
+                    queue.addLast(digits.get(i));
+                }
+               i++;
+            }
+            
+        }catch(Exception e){
+                queue.clear();
+                queue.addLast((long) i+1);
+                return queue;
+            }
+        
+        queue.addLast((long) i);
+        return queue;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int t = in.nextInt();
+        
+        for(int a = 0 ; a<t; a++){
+            long n = in.nextLong();
+            long k = in.nextLong();
+            String num = in.nextLine();            
+            ArrayList<Long> digits = dmakr(in.nextLine());
+            LinkedList<Long> queue = quemaker(digits,0,k);
+            int i = Math.toIntExact(queue.removeLast());
+            long max = windowprod(queue);
+            long temp = max;
+            
+            while(i < n){
+                long added = digits.get(i);
+                queue.addLast(added);
+                long removed = queue.removeFirst();
+                if (added != 0){
+                    temp = (temp / removed) * added;
+                }else{
+                    queue = quemaker(digits, i + 1,k);   
+                    try{
+                        long elem = queue.element();
+                        i = Math.toIntExact(queue.removeLast() -1);
+                        temp = windowprod(queue); 
+                    }catch (NoSuchElementException e){
+                            break;
+                    }   
+                }              
+                if (temp > max){max = temp;}
+                i++;
+            } 
+            System.out.println(max);
+        }
+    }
+}
+
+
