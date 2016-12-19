@@ -1,0 +1,78 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    
+    public static int sumRight(int i, int j, int[][] grid){
+
+        try{
+            int sum = grid[i][j] * grid[i][j+1] *grid[i][j+2] *grid[i][j+3];
+            return sum;
+        }
+        catch (IndexOutOfBoundsException e){
+            return 0;
+        }
+        
+    }
+    public static int sumDownLeft(int i, int j, int[][] grid){
+        try{
+            int sum = grid[i][j] *grid[i+1][j-1] *grid[i+2][j-2] *grid[i+3][j-3];
+            return sum;
+        }
+        catch (IndexOutOfBoundsException e){
+            return 0;
+        }        
+        
+    }
+    public static int sumDownRight(int i, int j, int[][] grid){
+        try{
+            int sum = grid[i][j] *grid[i+1][j+1] *grid[i+2][j+2] *grid[i+3][j+3];
+            return sum;
+        }
+        catch (IndexOutOfBoundsException e){
+            return 0;
+        }        
+        
+    }    
+    public static int sumDown(int i, int j, int[][] grid){
+        try{
+            int sum = grid[i][j] *grid[i+1][j] *grid[i+2][j] *grid[i+3][j];
+            return sum;
+        }
+        catch (IndexOutOfBoundsException e){
+            return 0;
+        }        
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int[][] grid = new int[20][20];
+        for(int grid_i=0; grid_i < 20; grid_i++){
+            for(int grid_j=0; grid_j < 20; grid_j++){
+                grid[grid_i][grid_j] = in.nextInt();
+            }
+        }
+        int currmax = 0;
+        int t1= 0;
+        int t2 = 0;
+        int t3 = 0;
+        int t4 = 0;
+        for (int i = 0; i<20; i++){
+            for(int j =0; j < 20; j++){
+              t1 = sumRight(i,j,grid);
+              t2 = sumDownLeft(i,j,grid);
+              t3 = sumDownRight(i,j,grid);
+              t4 = sumDown(i,j,grid);
+              int temp = Math.max(t1,t2);
+              int temp2 = Math.max(t3, t4);
+              temp = Math.max(temp,temp2);
+              //System.out.println(temp);
+                if(temp > currmax){currmax = temp;}          
+            }
+        }
+        System.out.println(currmax);
+    }
+}
