@@ -1,26 +1,27 @@
-// functions to find the n'th fibonacci number
+// functions to find the n'th fibonacci number- O(n)
 
 public static int fibCalc(int n){
 	if (n == 0 || n == 1){
 		return n;
 	}
-	int temp = 0, a = 0, count = 2;
+	
+	int temp = 0;
+	int a = 0;
 	int b = 1;
 	
-	while (count < n){
+	for (int i = 2; i < n; i++){
 		temp = b;
 		b = a + b;
 		a = temp;
-		count++;
 	}
 	
 	return b;
 }
 
-// Recursively using memoization
+// Recursively using memoization - O(n)
 
 public static int fibRec(int n){
-	int memo = new int[n - 1];
+	int[] memo = new int[n + 1];
 	int res = fibRec(n, memo);
 	return(res);
 }
@@ -31,9 +32,6 @@ public static int fibRec(int n, int[] memo){
 	}
 	
 	if (memo[n] > 0){
-		return memo[n];
-		
-	} else {
 		memo[n]  = fibRec(n - 1, memo) + fibRec(n-2, memo);
 	}
 	
