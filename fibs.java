@@ -31,7 +31,7 @@ public static int fibRec(int n, int[] memo){
 		return n;
 	}
 	
-	if (memo[n] > 0){
+	if (memo[n] == 0){
 		memo[n]  = fibRec(n - 1, memo) + fibRec(n-2, memo);
 	}
 	
