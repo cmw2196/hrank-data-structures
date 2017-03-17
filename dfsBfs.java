@@ -5,7 +5,7 @@ public class Node{
 	boolean visited;
 	node[] children;
 
-	public node(data, node[] kids){
+	public node(int data, node[] kids){
 		this.data = data;
 		this.visited = false;
 		for (node:kids){
