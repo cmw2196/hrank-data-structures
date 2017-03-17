@@ -6,7 +6,9 @@ public static int binarySearch(int[] arr, int num){
 }
 
 public static int binarySearch(int[] arr, int num, int low, int high){
-	if (low > high) { return -1;}
+	if (low > high){ 
+		return -1;
+	}
 	int mid = low + high / 2;
 
 	if (num > arr[mid]){
@@ -32,9 +34,9 @@ public static int binarySearch(int[] arr, int num){
 	int mid;
 	
 	while (low <= high){
-    mid = low + high / 2;
+    		mid = low + high / 2;
 		if (arr[mid] > num){
-			high = mid - -1;
+			high = mid -1;
 		} else if (arr[mid] < num){
 			low = mid + 1;
 		} else {
