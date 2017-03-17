@@ -84,25 +84,31 @@ public static void swap(int [] arr, int low, int high){
 //Iterative QuickSort
 
 public static void quickSort(int[] arr, 0, arr.length -1){
-	if (arr == null || arr.length = 0 || low >= high) { return;}
+	if (arr == null || arr.length == 0 || low >= high){
+		return;
+	}
 	
 	int pivot = arr[low + ((high - low)/2)];
-	int i = low, j = high;
+	int i = low, int j = high;
 
 	while (i <= j){
 		while (arr[i] < pivot) { i++;}
-		while (arr[j] > pivot) { j--;}
-		if (i <= j){
-			int temp = arr[j];
-			arr[j] = arr[i];
-			arr[i] = temp;
-			i++;
-			j--;
+			while (arr[j] > pivot) { j--;}
+			if (i <= j){
+				int temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+				i++;
+				j--;
 		}
 	}
 
-	if (low < j) {quickSort(arr, low, j);}
-	if (high > i) {quickSort(arr, i, high);}
+	if (low < j){
+		quickSort(arr, low, j);
+	}
+	if (high > i){
+		quickSort(arr, i, high);
+	}
 }
 
 
