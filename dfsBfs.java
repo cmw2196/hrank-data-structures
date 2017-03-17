@@ -23,10 +23,10 @@ public static boolean DFS(Node root, int val){
 	} else if (root.data == val){
 		return true;
 	} else {
-		node.visited == true;
-		for (node : root.children){
-			if (node.visited == true){
-				DFS(node, val)
+		node.visited = true;
+		for (kid: root.children){
+			if (kid.visited != true){
+				DFS(kid, val)
 			}
 		}
 	}
@@ -46,7 +46,7 @@ public static boolean DFS(Node root, int val){
 		stack.push(root);
 		root.visited = true;
 		while (!stack.isEmpty()){
-			curr = stack.pop()
+			int curr = stack.pop()
 			for (node : curr.children){
 				if (node.data == val){
 					return true;
@@ -78,7 +78,9 @@ public static boolean BFS(Node root, int val){
 	bfsQueue.addLast(root);
 	while (bfsQueue.size() > 0){
 		Node curr = bfsQueue.removeFirst();
-		if (curr.data == val){ return true;}
+		if (curr.data == val){
+			return true;
+		}
 		for (node in curr.children){
 			if (!node.visited){
 				node.visited = true;
