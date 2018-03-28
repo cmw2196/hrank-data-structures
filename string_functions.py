@@ -38,7 +38,6 @@ def palindromePermutation(string):
     return False
       
     
-    
 def _compare_equal_strings(string1, string2):
     """Compare two equal-length strings to see if they are one letter apart from each other."""
     one_away = False
@@ -51,6 +50,7 @@ def _compare_equal_strings(string1, string2):
             continue
     return True
             
+    
 def oneAway(string1, string2):
     """Check to see if string1 or string2 are one character apart."""
     if len(string1) == len(string2):
@@ -66,12 +66,3 @@ def oneAway(string1, string2):
     # if this is the case, a simple insertion ensures smaller == larger
     return True
 
-
-    
-   
-    
-  
-
-  
-
-    
