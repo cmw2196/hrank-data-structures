@@ -44,8 +44,8 @@ def create_bst(element_list):
 	
 	
 	
-def dfs(root_node):
-	"""Depth first search for a root node of class Node."""
+def bfs(root_node):
+	"""Breadth first search for a root node of class Node."""
 	if not root_node.data:
 		return None
 	
@@ -53,13 +53,25 @@ def dfs(root_node):
 	while len(node_queue):
 		node = node_queue.pop()
 		for child in node.children:
-			if child.visited:
-				continue
-			else:
-				child.visited = True
-				print child.data
-			node_queue.extend([child for child in child.children if child.visited is False])
+			child.visited = True
+			print child.data
+			node_queue.extend([c for c in child.children if c.visited is False])
 	return
+
+
+def _get_children(node):
+	"""Return children of a node."""
+	return [c for c in node.children if c.visited is False]
+
+
+def dfs(root_node):
+	"""Depth-first search for a root node of class Node."""
+	print root_node.data
+	root_node.visited = True
+	if not _get_children(root_node):
+		return
+	for child in root_node.children:
+		dfs(child)
 		
 		
 		
